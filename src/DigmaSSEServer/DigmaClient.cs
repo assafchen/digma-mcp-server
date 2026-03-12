@@ -119,7 +119,14 @@ public class DigmaClient
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsStringAsync();
     }
-
+    
+    public async Task<string> GetMostUsedEndpoints(int numberOfBugs = 10)
+    {
+        var response = await _httpClient.GetAsync($"/mcp/endpoints?top={numberOfBugs}");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
+    }
+    
     public async Task<string> GetAssetCategories(string environmentId)
     {
         var encodedEnv = WebUtility.UrlEncode(environmentId);
